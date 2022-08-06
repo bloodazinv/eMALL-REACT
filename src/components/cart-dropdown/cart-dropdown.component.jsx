@@ -1,20 +1,19 @@
-import {useContext} from "react";
-
 import Button from "../button/button.component";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
+import {selectCartItems} from "../../store/cart/cart.selector";
 import CartItem from "../cart-item/cart-item.component";
-import {CartContext} from "../../store/cart/cart.context";
 
 import {
     CartDropdownContainer,
     EmptyMessage,
     CartItems,
 } from "./cart-dropdown.styles";
-import {useNavigate} from "react-router-dom";
 
 const CartDropDown = () => {
 
-    const {cartItems} = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems);
     const navigate = useNavigate();
 
     const goToCheckoutHandler = () => {
