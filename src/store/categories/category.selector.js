@@ -18,6 +18,12 @@ export const selectCategories = createSelector(
         },{})
 );
 
+export const selectCategoriesIsLoading = createSelector(
+    [selectCategoryReducer],
+    (categoriesSlice) => categoriesSlice.isLoading
+)
+
+
 
 
 

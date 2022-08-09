@@ -7,6 +7,7 @@ import Button from "../button/button.component";
 
 
 import {SignUpContainer} from "./sign-up.styles";
+import {signUpStart} from "../../store/user/user.action";
 
 const defaultFormFields = {
     displayName: '',
@@ -18,6 +19,7 @@ const defaultFormFields = {
 const SignUp = () => {
     const [formFields, setFormFileds] = useState(defaultFormFields);
     const {displayName, email, password, confirmPassword} = formFields;
+    const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -26,9 +28,9 @@ const SignUp = () => {
           return;
       }
       try {
-          await createAuthUserWithEmailAndPassword(email, password);
-          resetFormFields();
+          dispatch(signUpStart(email, password, displayName));
 
+          resetFormFields();
       } catch (e) {
           if (e.code === 'auth/email-already-in-use'){
               alert('Cannot create user, email already in use');
